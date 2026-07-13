@@ -1,0 +1,84 @@
+<view class="report-root">
+  <view wx:if="{{!reportOpened}}" class="report-intro">
+    <view class="sealed-envelope">
+      <view class="envelope-flap"></view>
+      <view class="envelope-body">
+        <text class="intro-kicker">CampusMind Weekly</text>
+        <text class="intro-title">本周周报</text>
+        <text class="intro-range">{{rangeText}}</text>
+      </view>
+    </view>
+    <button class="open-report-btn" loading="{{generating}}" disabled="{{generating}}" bindtap="openWeeklyReport">
+      <text>{{generating ? '生成中...' : '拆开本周周报'}}</text>
+    </button>
+    <text class="intro-hint">打开后左右滑动查看学习、日程、无边记和专注总结。</text>
+  </view>
+
+  <scroll-view wx:else class="report-page {{reportRevealClass}}" type="list" scroll-y="true">
+    <view class="report-top">
+      <view>
+        <text class="page-title">本周周报</text>
+        <text class="page-subtitle">{{rangeText}}</text>
+      </view>
+      <button class="share-top-btn" bindtap="shareCurrentReport"><text>分享</text></button>
+    </view>
+
+    <swiper
+      class="report-swiper"
+      current="{{activeSlide}}"
+      bindchange="onSlideChange"
+      indicator-dots="{{true}}"
+      indicator-color="#e5e7eb"
+      indicator-active-color="#ef4444"
+    >
+      <swiper-item wx:for="{{reportSlides}}" wx:key="key">
+        <view class="letter-page {{item.key}}">
+          <text class="slide-eyebrow">{{item.eyebrow}}</text>
+          <text class="slide-title">{{item.title}}</text>
+          <text class="slide-summary">{{item.summary}}</text>
+          <view class="slide-list">
+            <view class="slide-list-item" wx:for="{{item.items}}" wx:for-item="line" wx:key="*this">
+              <view class="line-dot"></view>
+              <text>{{line}}</text>
+            </view>
+          </view>
+        </view>
+      </swiper-item>
+    </swiper>
+
+    <view class="slide-nav">
+      <button class="nav-chip" bindtap="prevSlide" disabled="{{activeSlide === 0}}"><text>上一页</text></button>
+      <text class="slide-count">{{activeSlide + 1}} / {{reportSlides.length}}</text>
+      <button class="nav-chip primary" bindtap="nextSlide" disabled="{{activeSlide === reportSlides.length - 1}}"><text>下一页</text></button>
+    </view>
+
+    <view class="section-block">
+      <view class="section-head">
+        <text class="section-title-text">AI 总结</text>
+        <button class="mini-btn" loading="{{generating}}" disabled="{{generating}}" bindtap="generateAIReport">
+          <text>{{generating ? '生成中...' : '重新生成'}}</text>
+        </button>
+      </view>
+      <view class="insight-card">
+        <text class="report-summary">{{report.summary}}</text>
+        <text class="next-focus">下周重点：{{report.nextWeekFocus}}</text>
+      </view>
+    </view>
+
+    <view class="opened-letter">
+      <view class="letter-paper">
+        <text class="letter-title">给下周的自己</text>
+        <text class="letter-copy">{{shareText}}</text>
+      </view>
+      <view class="letter-envelope-base"></view>
+      <view class="share-actions">
+        <button class="copy-btn" bindtap="copyShareText"><text>复制文案</text></button>
+        <button class="copy-btn ghost" open-type="share"><text>分享链接</text></button>
+        <button class="copy-btn ghost" bindtap="saveReportPoster"><text>保存图片</text></button>
+      </view>
+    </view>
+
+    <canvas class="poster-canvas" canvas-id="reportPoster"></canvas>
+    <view class="bottom-spacer"></view>
+  </scroll-view>
+</view>

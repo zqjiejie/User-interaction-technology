@@ -1,0 +1,352 @@
+page {
+  background: #ffffff;
+}
+
+.note-page {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: calc(150rpx + env(safe-area-inset-top)) 30rpx calc(30rpx + env(safe-area-inset-bottom));
+  overflow: hidden;
+  color: #111827;
+  background: #ffffff;
+}
+
+.editor-topbar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 82rpx;
+  margin-bottom: 20rpx;
+}
+
+.top-action {
+  min-width: 150rpx;
+  height: 64rpx;
+  margin: 0;
+  padding: 0 24rpx;
+  border: 1rpx solid #e5e7eb;
+  border-radius: 999rpx;
+  background: #f8fafc;
+  color: #334155;
+  font-size: 28rpx;
+  font-weight: 800;
+  line-height: 64rpx;
+  text-align: center;
+  transition: transform 150ms ease, background-color 150ms ease;
+}
+
+.top-action:active {
+  background: #f1f5f9;
+  transform: scale(0.97);
+}
+
+.top-action::after {
+  border: 0;
+}
+
+.cancel-action,
+.done-action,
+.delete-action {
+  color: #111827;
+}
+
+.delete-action {
+  border-color: #fecaca;
+  background: #fef2f2;
+  color: #ef4444;
+}
+
+.done-action,
+.save-action {
+  border-color: #ef4444;
+  background: #ef4444;
+  color: #ffffff;
+}
+
+.top-title {
+  flex: 1;
+  color: #151515;
+  font-size: 36rpx;
+  font-weight: 800;
+  text-align: center;
+}
+
+.note-scroll {
+  flex: 1 1 auto;
+  height: 0;
+}
+
+.note-card {
+  position: relative;
+  box-sizing: border-box;
+  min-height: calc(100vh - 220rpx - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  padding: 32rpx 34rpx 146rpx;
+  border: 1rpx solid #e5e7eb;
+  border-radius: 22rpx;
+  background: #ffffff;
+  box-shadow: 0 10rpx 28rpx rgba(15, 23, 42, 0.05);
+}
+
+.note-meta {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+  min-height: 54rpx;
+  color: #111827;
+  font-size: 34rpx;
+  font-weight: 800;
+}
+
+.date-dot {
+  width: 24rpx;
+  height: 24rpx;
+  border: 4rpx solid #ef4444;
+  border-radius: 50%;
+}
+
+.note-editor {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 680rpx;
+  margin-top: 18rpx;
+  padding: 0 0 34rpx;
+  background: transparent;
+  color: #111827;
+  font-size: 34rpx;
+  line-height: 1.7;
+}
+
+.attachment-panel {
+  position: absolute;
+  left: 32rpx;
+  bottom: 118rpx;
+  z-index: 5;
+  width: 344rpx;
+  padding: 10rpx;
+  border: 1rpx solid #fde68a;
+  border-radius: 20rpx;
+  background: #ffffff;
+  box-shadow: 0 16rpx 36rpx rgba(15, 23, 42, 0.12);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(18rpx) scale(0.98);
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.attachment-panel.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+.attachment-option {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  width: 100%;
+  min-height: 72rpx;
+  margin: 0;
+  padding: 0 18rpx;
+  border-radius: 14rpx;
+  background: transparent;
+  color: #111827;
+  font-size: 28rpx;
+  font-weight: 700;
+  line-height: 72rpx;
+  text-align: left;
+  transition: transform 150ms ease, background-color 150ms ease;
+}
+
+.attachment-option-pressed {
+  background: #fffbeb;
+  transform: scale(0.98);
+}
+
+.attachment-option::after,
+.paperclip-button::after {
+  border: 0;
+}
+
+.option-dot {
+  flex: 0 0 auto;
+  width: 34rpx;
+  height: 34rpx;
+  border: 1rpx solid #fde68a;
+  border-radius: 10rpx;
+  background: #fff7d6;
+}
+
+.attachment-list {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+  margin-top: 10rpx;
+  padding-bottom: 20rpx;
+}
+
+.image-attachments {
+  position: relative;
+  z-index: 2;
+  margin-top: 10rpx;
+  margin-bottom: 14rpx;
+  padding: 18rpx;
+  border-radius: 18rpx;
+  background: #f8fafc;
+}
+
+.attachment-section-title {
+  display: block;
+  margin-bottom: 14rpx;
+  color: #111827;
+  font-size: 28rpx;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.image-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14rpx;
+  width: 100%;
+}
+
+.image-thumb {
+  flex: 0 0 140rpx;
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 18rpx;
+  background: #e5e7eb;
+}
+
+.attachment-item {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  min-height: 88rpx;
+  padding: 14rpx 18rpx;
+  overflow: hidden;
+  border: 1rpx solid #e5e7eb;
+  border-radius: 18rpx;
+  background: #f8fafc;
+  transition: transform 150ms ease, background-color 150ms ease;
+}
+
+.attachment-item:active {
+  background: #f1f5f9;
+  transform: scale(0.99);
+}
+
+.attachment-thumb {
+  flex: 0 0 auto;
+  width: 82rpx;
+  height: 82rpx;
+  border-radius: 14rpx;
+  background: #e5e7eb;
+}
+
+.attachment-kind-dot {
+  flex: 0 0 auto;
+  width: 22rpx;
+  height: 22rpx;
+  border: 4rpx solid #ef4444;
+  border-radius: 50%;
+}
+
+.attachment-info {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.attachment-title {
+  color: #111827;
+  font-size: 28rpx;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.attachment-subtitle {
+  overflow: hidden;
+  color: #64748b;
+  font-size: 24rpx;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.scan-text-preview {
+  white-space: normal;
+  max-height: 96rpx;
+}
+
+.attachment-mask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 4;
+  background: transparent;
+}
+
+.paperclip-button {
+  position: absolute;
+  left: 32rpx;
+  bottom: 28rpx;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10rpx;
+  width: auto;
+  min-width: 150rpx;
+  height: 72rpx;
+  min-height: 72rpx;
+  margin: 0;
+  padding: 0 22rpx;
+  border: 1rpx solid rgba(234, 179, 8, 0.32);
+  border-radius: 999rpx;
+  background: #fffdf2;
+  color: #a16207;
+  font-size: 26rpx;
+  font-weight: 900;
+  box-shadow: 0 12rpx 28rpx rgba(234, 179, 8, 0.16);
+  transition: transform 150ms ease, background-color 150ms ease;
+}
+
+.paperclip-button.active {
+  background: #fef3c7;
+}
+
+.paperclip-button:active {
+  transform: scale(0.96);
+}
+
+.paperclip-label,
+.paperclip-plus {
+  display: block;
+  line-height: 1;
+}
+
+.paperclip-plus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34rpx;
+  height: 34rpx;
+  border-radius: 50%;
+  background: #facc15;
+  color: #ffffff;
+  font-size: 28rpx;
+  font-weight: 900;
+}

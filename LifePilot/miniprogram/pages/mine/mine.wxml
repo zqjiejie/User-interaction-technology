@@ -1,0 +1,168 @@
+<view class="page">
+  <scroll-view class="mine-scroll" type="list" scroll-y="true">
+    <view class="section">
+      <view class="profile-card">
+        <image class="avatar" src="{{user.avatarUrl}}" wx:if="{{user.avatarUrl}}" mode="aspectFill" />
+        <view class="avatar" wx:else><text>{{user.nickname || '智'}}</text></view>
+        <view class="profile-main">
+          <text class="profile-name">{{user.nickname || '智慧校园用户'}}</text>
+          <text class="muted">{{user.school || '未填写学校'}} - {{user.major || '未填写专业'}} - {{user.grade || '未填写年级'}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title"><text>个人资料与目标</text></view>
+      <view class="card stack" wx:if="{{!editMode}}">
+        <view class="row" wx:for="{{profileItems}}" wx:key="label">
+          <text class="muted">{{item.label}}</text>
+          <text>{{item.value}}</text>
+        </view>
+        <view class="row" wx:if="{{profileItems.length === 0}}">
+          <text class="muted">还没有填写目标。</text>
+        </view>
+        <button class="mini-button" bindtap="enableEdit"><text>编辑</text></button>
+      </view>
+
+      <view class="card stack" wx:if="{{editMode}}">
+        <view class="form-hint">
+          <text>完善资料后，CampusMind 会围绕你的真实目标整理日程、专注时间和周报。</text>
+        </view>
+        <view class="form-item">
+          <text class="form-label">学校</text>
+          <input class="form-input" value="{{formSchool}}" placeholder="学校名称" bindinput="onSchoolInput" />
+        </view>
+        <view class="form-item">
+          <text class="form-label">专业</text>
+          <input class="form-input" value="{{formMajor}}" placeholder="专业" bindinput="onMajorInput" />
+        </view>
+        <view class="form-item">
+          <text class="form-label">年级</text>
+          <input class="form-input" value="{{formGrade}}" placeholder="大一 / 研一" bindinput="onGradeInput" />
+        </view>
+        <view class="form-divider"></view>
+        <view class="form-item">
+          <text class="form-label">学习目标（小时/周）</text>
+          <input class="form-input" type="number" value="{{formStudyGoal}}" placeholder="25" bindinput="onStudyGoalInput" />
+        </view>
+        <view class="form-item">
+          <text class="form-label">运动目标（次/周）</text>
+          <input class="form-input" type="number" value="{{formSportGoal}}" placeholder="3" bindinput="onSportGoalInput" />
+        </view>
+        <view class="form-item">
+          <text class="form-label">睡眠目标</text>
+          <input class="form-input" value="{{formSleepGoal}}" placeholder="23:30" bindinput="onSleepGoalInput" />
+        </view>
+        <view class="form-item">
+          <text class="form-label">娱乐上限（分钟/天）</text>
+          <input class="form-input" type="number" value="{{formEntertainmentLimit}}" placeholder="120" bindinput="onEntertainmentLimitInput" />
+        </view>
+        <button class="save-btn" loading="{{saving}}" disabled="{{saving}}" bindtap="handleSaveProfile">
+          <text>{{saving ? '保存中...' : '保存资料'}}</text>
+        </button>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title"><text>工具</text></view>
+      <view class="card stack">
+        <view class="row link-row" data-path="/pages/schedule/schedule" bindtap="goPage">
+          <text>全部日程</text>
+          <text class="muted">打开</text>
+        </view>
+        <view class="row link-row" data-path="/pages/pomodoroList/pomodoroList" bindtap="goPage">
+          <text>番茄钟</text>
+          <text class="muted">打开</text>
+        </view>
+        <view class="row link-row" bindtap="importCoursesFromImage">
+          <view class="row-main">
+            <text>图片导入课程</text>
+            <text class="muted">OCR 识别课程表并导入日程</text>
+          </view>
+          <text class="muted">{{importingCourses ? '识别中' : '打开'}}</text>
+        </view>
+        <view class="row link-row" data-path="/pages/report/report" bindtap="goPage">
+          <text>周报</text>
+          <text class="muted">打开</text>
+        </view>
+        <view class="row link-row" data-path="/pages/record/record" bindtap="goPage">
+          <text>生活记录</text>
+          <text class="muted">打开</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title"><text>隐私与 AI</text></view>
+      <view class="card">
+        <view class="row">
+          <view class="row-main">
+            <text class="auth-title">允许分析本周无边记</text>
+            <text class="muted">默认关闭，可随时取消。</text>
+          </view>
+          <switch checked="{{aiDiaryAllowed}}" bindchange="toggleDiaryAuth" />
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title"><text>无边记</text></view>
+      <view
+        class="note-entry"
+        data-id="{{latestNote.id}}"
+        data-cloud-id="{{latestNote.cloudId}}"
+        bindtap="openNotes"
+        bindtouchstart="onNoteTouchStart"
+        bindtouchend="onNoteTouchEnd"
+      >
+        <view class="note-entry-main">
+          <text class="note-entry-title">无边记</text>
+          <text class="note-entry-desc">{{latestPreview}}</text>
+        </view>
+        <view class="note-entry-side">
+          <text class="note-count">{{noteCount}}</text>
+          <text class="note-arrow">›</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="section" wx:if="{{isLoggedIn}}">
+      <view class="section-title"><text>账号</text></view>
+      <view class="card">
+        <view class="row">
+          <view class="row-main">
+            <text class="auth-title">退出登录</text>
+            <text class="muted">退出后可再次使用微信登录。</text>
+          </view>
+          <button class="logout-btn" bindtap="handleLogout"><text>退出</text></button>
+        </view>
+      </view>
+    </view>
+    <view class="mine-bottom-spacer"></view>
+  </scroll-view>
+
+  <view wx:if="{{courseConfirmVisible}}" class="course-mask" catchtap="closeCourseConfirm"></view>
+  <view wx:if="{{courseConfirmVisible}}" class="course-panel">
+    <view class="course-panel-head">
+      <text class="course-panel-title">识别到 {{recognizedCourses.length}} 门课程</text>
+      <button class="course-close" catchtap="closeCourseConfirm"><text>取消</text></button>
+    </view>
+    <scroll-view class="course-list" type="list" scroll-y="true">
+      <view
+        class="course-card {{item.importable ? '' : 'disabled'}}"
+        wx:for="{{recognizedCourses}}"
+        wx:key="id"
+      >
+        <text class="course-title" overflow="ellipsis" max-lines="2">{{item.title || '未识别课程名'}}</text>
+        <text class="course-meta">{{item.summary}}</text>
+        <text class="course-meta">{{item.startTime || '--:--'}}-{{item.endTime || '--:--'}}</text>
+        <text class="course-meta">{{item.location || '未识别地点'}}</text>
+        <text wx:if="{{!item.importable}}" class="course-warning">信息不完整，暂不可导入</text>
+      </view>
+      <view class="warning-box" wx:if="{{recognitionWarnings.length}}">
+        <text wx:for="{{recognitionWarnings}}" wx:key="*this">{{item}}</text>
+      </view>
+    </scroll-view>
+    <button class="confirm-import" bindtap="confirmImportCourses"><text>确认导入全部</text></button>
+  </view>
+</view>

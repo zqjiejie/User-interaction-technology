@@ -1,0 +1,33 @@
+﻿<view class="select-page">
+  <view class="topbar" style="{{topBarStyle}}">
+    <button class="back" style="{{leftActionStyle}}" bindtap="goBack"><text>取消</text></button>
+    <text class="top-title">选择番茄钟模式</text>
+  </view>
+
+  <view class="select-board">
+    <view class="select-row">
+      <button class="choice study" data-type="study" bindtap="startTimer">
+        <text class="choice-icon">学</text>
+        <text class="choice-title">学习</text>
+        <text class="choice-desc">专注、书本与清晰目标</text>
+      </button>
+      <button class="choice sport" data-type="sport" bindtap="startTimer">
+        <text class="choice-icon">动</text>
+        <text class="choice-title">运动</text>
+        <text class="choice-desc">能量、节奏与律动</text>
+      </button>
+    </view>
+    <view class="select-row">
+      <button class="choice entertainment" data-type="entertainment" bindtap="startTimer">
+        <text class="choice-icon">娱</text>
+        <text class="choice-title">娱乐</text>
+        <text class="choice-desc">音乐、游戏与放松</text>
+      </button>
+      <button class="choice sleep" data-type="sleep" bindtap="startTimer">
+        <text class="choice-icon">眠</text>
+        <text class="choice-title">睡眠</text>
+        <text class="choice-desc">夜晚、呼吸与安静</text>
+      </button>
+    </view>
+  </view>
+</view>

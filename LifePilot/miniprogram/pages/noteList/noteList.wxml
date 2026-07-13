@@ -1,0 +1,29 @@
+<view class="note-list-page">
+  <scroll-view class="note-list-scroll" type="list" scroll-y="true">
+    <block wx:if="{{groups.length}}">
+      <view class="date-group" wx:for="{{groups}}" wx:key="date">
+        <text class="date-title">{{item.date}}</text>
+        <view
+          class="note-card"
+          wx:for="{{item.items}}"
+          wx:for-item="note"
+          wx:key="id"
+          data-id="{{note.id}}"
+          data-cloud-id="{{note.cloudId}}"
+          data-date="{{note.date}}"
+          bindtap="editNote"
+          bindtouchstart="onNoteTouchStart"
+          bindtouchend="onNoteTouchEnd"
+          bindlongpress="editNote"
+        >
+          <text class="note-preview" overflow="ellipsis" max-lines="2">{{note.preview}}</text>
+          <text wx:if="{{note.attachmentCount}}" class="note-attachment-count">含 {{note.attachmentCount}} 个附件</text>
+          <text class="note-time">{{note.updatedAt}}</text>
+        </view>
+      </view>
+    </block>
+    <view class="empty-panel" wx:else>
+      <text>暂无无边记</text>
+    </view>
+  </scroll-view>
+</view>

@@ -1,0 +1,68 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/home/home",
+    "pages/calendar/calendar",
+    "pages/discover/discover",
+    "pages/discoverModule/discoverModule",
+    "pages/mine/mine",
+    "pages/noteList/noteList",
+    "pages/search/search",
+    "pages/scheduleAdd/scheduleAdd",
+    "pages/schedule/schedule",
+    "pages/record/record",
+    "pages/recordModule/recordModule",
+    "pages/report/report",
+    "pages/sport/sport",
+    "pages/entertainment/entertainment",
+    "pages/sleep/sleep",
+    "pages/pomodoroSelect/pomodoroSelect",
+    "pages/pomodoroTimer/pomodoroTimer",
+    "pages/pomodoroList/pomodoroList",
+    "pages/boundlessNote/boundlessNote"
+  ],
+  "window": {
+    "navigationBarTitleText": "CampusMind",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#ffffff"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#9ca3af",
+    "selectedColor": "#ef4444",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "",
+        "iconPath": "assets/tabbar/today.png",
+        "selectedIconPath": "assets/tabbar/today-selected.png"
+      },
+      {
+        "pagePath": "pages/calendar/calendar",
+        "text": "",
+        "iconPath": "assets/tabbar/calendar.png",
+        "selectedIconPath": "assets/tabbar/calendar-selected.png"
+      },
+      {
+        "pagePath": "pages/discover/discover",
+        "text": "",
+        "iconPath": "assets/tabbar/discover.png",
+        "selectedIconPath": "assets/tabbar/discover-selected.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "",
+        "iconPath": "assets/tabbar/mine.png",
+        "selectedIconPath": "assets/tabbar/mine-selected.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2",
+  
+  "componentFramework": "glass-easel",
+  "lazyCodeLoading": "requiredComponents"
+}

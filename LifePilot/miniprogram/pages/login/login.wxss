@@ -1,0 +1,259 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #eff6ff 0%, #ffffff 40%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 顶部装饰 */
+.top-decoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 400rpx;
+  pointer-events: none;
+}
+
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.15;
+}
+
+.c1 {
+  width: 360rpx;
+  height: 360rpx;
+  background: #ef4444;
+  top: -120rpx;
+  right: -80rpx;
+}
+
+.c2 {
+  width: 240rpx;
+  height: 240rpx;
+  background: #3b82f6;
+  top: 60rpx;
+  left: -60rpx;
+}
+
+.c3 {
+  width: 160rpx;
+  height: 160rpx;
+  background: #f59e0b;
+  top: 180rpx;
+  left: 50%;
+  margin-left: -80rpx;
+}
+
+/* 主内容 */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 200rpx 60rpx 60rpx;
+}
+
+/* Logo 区域 */
+.logo-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 80rpx;
+}
+
+.logo-icon {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 36rpx;
+  background: linear-gradient(135deg, #ef4444, #f97316);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30rpx;
+  box-shadow: 0 12rpx 32rpx rgba(239, 68, 68, 0.3);
+}
+
+.logo-emoji {
+  font-size: 64rpx;
+}
+
+.app-name {
+  font-size: 48rpx;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 12rpx;
+}
+
+.app-slogan {
+  font-size: 28rpx;
+  color: #64748b;
+  letter-spacing: 2rpx;
+}
+
+/* 功能介绍 */
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20rpx;
+  padding: 0 20rpx;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  padding: 16rpx 28rpx;
+  background: #ffffff;
+  border-radius: 40rpx;
+  border: 1rpx solid #e2e8f0;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+}
+
+.feature-icon {
+  font-size: 28rpx;
+}
+
+.feature-text {
+  font-size: 24rpx;
+  color: #475569;
+  font-weight: 500;
+}
+
+/* 用户信息设置 */
+.user-info-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28rpx;
+  padding: 0 60rpx;
+  margin-bottom: 20rpx;
+}
+
+.avatar-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.avatar-picker {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  padding: 0;
+  margin: 0;
+  border: 3rpx dashed #cbd5e1;
+  background: #f8fafc;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.avatar-picker::after {
+  border: none;
+}
+
+.avatar-preview {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e2e8f0;
+}
+
+.avatar-plus {
+  font-size: 48rpx;
+  color: #94a3b8;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.avatar-label {
+  font-size: 22rpx;
+  color: #94a3b8;
+}
+
+.nickname-section {
+  width: 100%;
+  max-width: 500rpx;
+}
+
+.nickname-input {
+  width: 100%;
+  height: 80rpx;
+  border-radius: 16rpx;
+  background: #ffffff;
+  border: 1rpx solid #e2e8f0;
+  padding: 0 28rpx;
+  font-size: 28rpx;
+  color: #1e293b;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.nickname-input::placeholder {
+  color: #94a3b8;
+}
+
+/* 底部 */
+.bottom-section {
+  padding: 40rpx 60rpx 80rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.privacy-notice {
+  font-size: 22rpx;
+  color: #94a3b8;
+  margin-bottom: 30rpx;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.privacy-notice .link {
+  color: #3b82f6;
+}
+
+.login-btn {
+  width: 100%;
+  max-width: 600rpx;
+  height: 100rpx;
+  border-radius: 50rpx;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #ffffff;
+  font-size: 32rpx;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  box-shadow: 0 8rpx 24rpx rgba(34, 197, 94, 0.35);
+  transition: all 0.2s ease;
+}
+
+.login-btn:active {
+  transform: scale(0.97);
+  opacity: 0.9;
+}
+
+.login-btn[disabled] {
+  background: #86efac;
+  box-shadow: none;
+}

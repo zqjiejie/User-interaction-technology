@@ -1,0 +1,154 @@
+<view class="calendar-root" capture-bind:touchmove="onCalendarRootTouchMove" capture-bind:touchend="onCalendarRootTouchEnd" capture-bind:touchcancel="onCalendarRootTouchCancel" bindtouchmove="onCalendarRootTouchMove" bindtouchend="onCalendarRootTouchEnd" bindtouchcancel="onCalendarRootTouchCancel">
+  <scroll-view class="calendar-ipad" type="list" scroll-y="true">
+    <view class="month-line" style="{{monthLineStyle}}">
+      <button class="month-arrow prev-button" style="{{prevButtonStyle}}" data-delta="-1" bindtap="changeMonth">
+        <view class="chevron prev"></view>
+      </button>
+      <text class="month-title">{{monthTitle}}</text>
+      <button class="month-arrow next-button" style="{{nextButtonStyle}}" data-delta="1" bindtap="changeMonth">
+        <view class="chevron next"></view>
+      </button>
+    </view>
+
+    <scroll-view class="calendar-x-scroll" type="list" scroll-x="true" enable-flex="true" scroll-left="{{calendarScrollLeft}}" bindscroll="onCalendarScroll">
+      <view class="calendar-wide-inner">
+        <view class="wide-weekdays">
+          <view wx:for="{{weekdays}}" wx:key="*this"><text>{{item}}</text></view>
+        </view>
+
+        <view class="wide-month">
+          <view class="wide-day {{item.disabled ? 'wide-empty' : ''}} {{item.isToday ? 'wide-today' : ''}} {{dragActive && !item.disabled ? 'drop-ready' : ''}} {{dragTargetDay === item.day && item.day ? 'drop-hover' : ''}}" wx:for="{{days}}" wx:key="id" data-day="{{item.day}}" bindtap="openDay">
+            <view class="wide-date">
+              <text class="wide-number" wx:if="{{!item.disabled}}">{{item.day}}</text>
+              <text class="wide-lunar">{{item.lunar}}</text>
+            </view>
+            <view class="wide-events">
+              <block wx:for="{{item.events}}" wx:for-item="event" wx:for-index="eventIndex" wx:key="id">
+                <view class="wide-swipe-row {{dragActive && dragSourceId === event.id && dragSourceDateKey === event.occurrenceDateKey ? 'is-dragging-source' : ''}}" wx:if="{{eventIndex < 2}}" data-id="{{event.id}}" data-date="{{event.occurrenceDateKey}}" catchtap="editSchedule" catchtouchstart="beginScheduleDrag" catchtouchmove="trackSchedulePressMove" catchtouchend="cancelSchedulePress" catchtouchcancel="cancelScheduleTouch">
+                  <view class="wide-event">
+                    <view class="event-marker"></view>
+                    <text class="event-title" overflow="ellipsis" max-lines="1">{{event.displayTitle}}</text>
+                    <text class="event-time">{{event.start}}</text>
+                  </view>
+                </view>
+              </block>
+              <text class="more-event" wx:if="{{item.events.length > 2}}">+ 更多 {{item.events.length - 2}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </scroll-view>
+
+  <view class="sheet-mask {{sheetVisible ? 'is-open' : ''}}" catchtap="closeDaySheet"></view>
+  <view class="day-sheet {{sheetOpen ? 'is-open' : ''}} {{sheetHeightClass}}">
+    <view class="sheet-handle-zone" catchtouchstart="onSheetDragStart" catchtouchend="onSheetDragEnd">
+      <view class="sheet-handle"></view>
+      <text class="sheet-height-label">{{sheetHeightLabel}}</text>
+    </view>
+    <view class="sheet-title">
+      <view class="sheet-title-main">
+        <text class="sheet-date">{{selectedDateKey}}</text>
+        <text class="sheet-subtitle">上滑展开，下滑收起，左右切换内容</text>
+      </view>
+      <button class="sheet-close" catchtap="closeDaySheet" aria-label="关闭日期详情">×</button>
+    </view>
+    <view class="sheet-tabs" role="tablist">
+      <button class="sheet-tab {{sheetTab === 'schedule' ? 'active' : ''}}" data-tab="schedule" catchtap="setSheetTab" aria-label="查看日程">
+        <text class="sheet-tab-icon">日</text>
+        <text>日程</text>
+      </button>
+      <button class="sheet-tab {{sheetTab === 'notes' ? 'active' : ''}}" data-tab="notes" catchtap="setSheetTab" aria-label="查看无边记">
+        <text class="sheet-tab-icon">记</text>
+        <text>无边记</text>
+      </button>
+    </view>
+
+    <view class="sheet-body" bindtouchstart="onSheetSwipeStart" bindtouchend="onSheetSwipeEnd">
+      <scroll-view wx:if="{{sheetTab === 'schedule'}}" class="sheet-scroll" type="list" scroll-y="true">
+        <block wx:if="{{popupEvents.length}}">
+          <view class="sheet-swipe-row" wx:for="{{popupEvents}}" wx:key="id" data-id="{{item.id}}" data-date="{{item.occurrenceDateKey}}" catchtap="editSchedule" catchtouchstart="onAgendaTouchStart" catchtouchmove="onAgendaTouchMove" catchtouchend="onAgendaTouchEnd" catchtouchcancel="onAgendaTouchCancel">
+            <view class="sheet-event-card">
+              <view class="event-marker"></view>
+              <view class="sheet-event-main">
+                <text class="sheet-event-title" overflow="ellipsis" max-lines="1">{{item.title}}</text>
+                <text class="sheet-event-location" overflow="ellipsis" max-lines="1">{{item.displayLocation || item.location || ''}}</text>
+              </view>
+              <view class="sheet-event-time">
+                <text>{{item.start || '全天'}}</text>
+                <text>{{item.end}}</text>
+              </view>
+            </view>
+          </view>
+        </block>
+        <view class="empty-panel" wx:else>
+          <text class="empty-panel-title">这天还没有日程</text>
+          <button class="empty-panel-action" catchtap="createScheduleForSelected">添加日程</button>
+        </view>
+      </scroll-view>
+
+      <scroll-view wx:if="{{sheetTab === 'notes'}}" class="sheet-scroll" type="list" scroll-y="true">
+        <block wx:if="{{selectedNotes.length}}">
+          <view class="note-entry-card" wx:for="{{selectedNotes}}" wx:key="id" data-id="{{item.id}}" data-date="{{item.date}}" bindlongpress="openNoteEntry">
+            <text class="note-entry-time">{{item.updatedAt}}</text>
+            <text class="note-entry-text" overflow="ellipsis" max-lines="2">{{item.preview}}</text>
+          </view>
+        </block>
+        <view class="empty-panel" wx:else>
+          <text class="empty-panel-title">还没有无边记</text>
+          <button class="empty-panel-action" catchtap="createNoteEntry">写一条无边记</button>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+  <view wx:if="{{dragActive}}" class="drag-calendar-layer">
+    <view class="drag-calendar-header">
+      <text>{{dragViewMonthTitle}}</text>
+    </view>
+    <scroll-view class="calendar-x-scroll drag-calendar-scroll" type="list" scroll-x="true" enable-flex="true" scroll-left="{{dragViewScrollLeft}}">
+      <view class="calendar-wide-inner drag-calendar-inner">
+        <view class="wide-weekdays drag-weekdays">
+          <view wx:for="{{weekdays}}" wx:key="*this"><text>{{item}}</text></view>
+        </view>
+        <view class="wide-month">
+          <view class="wide-day {{item.disabled ? 'wide-empty' : ''}} {{item.isToday ? 'wide-today' : ''}} {{!item.disabled ? 'drop-ready' : ''}} {{dragViewTargetDay === item.day && item.day ? 'drop-hover' : ''}}" wx:for="{{dragViewDays}}" wx:key="id" data-day="{{item.day}}">
+            <view class="wide-date">
+              <text class="wide-number" wx:if="{{!item.disabled}}">{{item.day}}</text>
+              <text class="wide-lunar">{{item.lunar}}</text>
+            </view>
+            <view class="wide-events">
+              <block wx:for="{{item.events}}" wx:for-item="event" wx:for-index="eventIndex" wx:key="id">
+                <view class="wide-swipe-row {{dragSourceId === event.id && dragSourceDateKey === event.occurrenceDateKey ? 'is-dragging-source' : ''}}" wx:if="{{eventIndex < 2}}">
+                  <view class="wide-event">
+                    <view class="event-marker"></view>
+                    <text class="event-title" overflow="ellipsis" max-lines="1">{{event.displayTitle}}</text>
+                    <text class="event-time">{{event.start}}</text>
+                  </view>
+                </view>
+              </block>
+              <text class="more-event" wx:if="{{item.events.length > 2}}">+ 更多 {{item.events.length - 2}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+  <view wx:if="{{dragActive}}" class="schedule-drag-layer" catchtouchmove="onGlobalDragMove" catchtouchend="onGlobalDragEnd" catchtouchcancel="onGlobalDragCancel">
+    <view class="schedule-drag-ghost" style="{{dragGhostStyle}}">
+      <view class="event-marker"></view>
+      <view class="schedule-drag-main">
+        <text class="schedule-drag-title" overflow="ellipsis" max-lines="1">{{dragGhostTitle}}</text>
+        <text class="schedule-drag-time">{{dragGhostTime || '全天'}}</text>
+      </view>
+    </view>
+    <view class="schedule-drag-hint">
+      <text>{{dragHintText}}</text>
+    </view>
+    <view wx:if="{{dragEdgeVisible}}" class="drag-edge-zone {{dragEdgeSide}} {{dragEdgeMode}}">
+      <text>{{dragEdgeLabel}}</text>
+      <view class="drag-edge-track" wx:if="{{dragEdgeMode === 'month'}}">
+        <view class="drag-edge-progress" style="{{dragEdgeProgressStyle}}"></view>
+      </view>
+    </view>
+  </view>
+</view>

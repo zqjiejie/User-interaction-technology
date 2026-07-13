@@ -1,0 +1,111 @@
+page {
+  background: #f8fafc;
+}
+
+.note-list-page {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: calc(24rpx + env(safe-area-inset-top)) 28rpx calc(34rpx + env(safe-area-inset-bottom));
+  overflow: hidden;
+  color: #111827;
+}
+
+.note-list-header {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 26rpx;
+}
+
+.note-list-title,
+.note-list-subtitle {
+  display: block;
+}
+
+.note-list-title {
+  font-size: 44rpx;
+  font-weight: 800;
+}
+
+.note-list-subtitle {
+  margin-top: 8rpx;
+  color: #64748b;
+  font-size: 26rpx;
+}
+
+.create-button {
+  min-width: 124rpx;
+  height: 64rpx;
+  border-radius: 16rpx;
+  background: #ef4444;
+  color: #ffffff;
+  font-size: 28rpx;
+  font-weight: 700;
+  line-height: 64rpx;
+}
+
+.note-list-scroll {
+  flex: 1 1 auto;
+  height: 0;
+}
+
+.date-group {
+  margin-bottom: 32rpx;
+}
+
+.date-title {
+  display: block;
+  margin: 0 4rpx 14rpx;
+  color: #64748b;
+  font-size: 28rpx;
+  font-weight: 700;
+}
+
+.note-card {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20rpx;
+  min-height: 112rpx;
+  margin-bottom: 16rpx;
+  padding: 24rpx 26rpx;
+  border: 1rpx solid #e2e8f0;
+  border-radius: 18rpx;
+  background: #ffffff;
+  box-shadow: 0 10rpx 28rpx rgba(15, 23, 42, 0.05);
+}
+
+.note-preview {
+  flex: 1;
+  min-width: 0;
+  color: #111827;
+  font-size: 30rpx;
+  line-height: 1.45;
+}
+
+.note-time {
+  flex: 0 0 auto;
+  color: #94a3b8;
+  font-size: 24rpx;
+}
+
+.note-attachment-count {
+  flex: 0 0 auto;
+  padding: 8rpx 14rpx;
+  border-radius: 999rpx;
+  background: #f1f5f9;
+  color: #64748b;
+  font-size: 22rpx;
+  font-weight: 600;
+}
+
+.empty-panel {
+  padding-top: 220rpx;
+  color: #94a3b8;
+  font-size: 36rpx;
+  text-align: center;
+}

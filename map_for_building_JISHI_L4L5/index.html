@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>济事楼 4-5 楼导览系统</title>
+    <script src="js/rooms-data.js?v=20260523-9"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script defer src="js/index.js?v=20260523-9"></script>
+    <link rel="stylesheet" href="css/style.css?v=20260523-9">
+</head>
+
+<body>
+    <header class="app-header">
+        <div>
+            <p class="eyebrow">Jishi Building Guide</p>
+            <h1>济事楼 4-5 楼导览系统</h1>
+        </div>
+        <div class="search-panel">
+            <label for="searchInput">搜索房间、区域、用途或人员</label>
+            <div class="search-row">
+                <input id="searchInput" type="search" placeholder="例如：学工办、葛蕾、446、SSE、教学机房">
+                <button id="clearSearch" type="button" title="清空搜索">×</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="layout">
+        <section class="map-section" aria-label="楼层导览地图">
+            <div class="floor-toolbar">
+                <div class="floor-tabs" role="tablist" aria-label="选择楼层">
+                    <button class="floor-tab active" type="button" data-floor="4">4 楼</button>
+                    <button class="floor-tab" type="button" data-floor="5">5 楼</button>
+                </div>
+                <p id="floorSummary">正在读取房间信息...</p>
+            </div>
+
+            <div class="map-frame">
+                <img id="floorMap" src="map/map_for_f4.png?v=20260523-9" alt="济事楼 4 楼导览地图">
+                <div id="pinLayer" class="pin-layer" aria-label="地图房间入口"></div>
+            </div>
+        </section>
+
+        <aside class="room-browser" aria-label="房间总览与快速选择">
+            <div class="browser-header">
+                <h2>房间与公共区域总览</h2>
+                <span id="resultCount">0 处</span>
+            </div>
+            <div id="roomList" class="room-list"></div>
+        </aside>
+    </main>
+
+    <div id="roomModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <article class="modal-panel">
+            <button id="closeModal" class="modal-close" type="button" title="关闭">×</button>
+            <div class="modal-grid">
+                <div>
+                    <p id="modalFloor" class="eyebrow"></p>
+                    <h2 id="modalTitle"></h2>
+                    <dl class="info-list">
+                        <div>
+                            <dt>用途</dt>
+                            <dd id="modalUsage"></dd>
+                        </div>
+                        <div>
+                            <dt>房间人员</dt>
+                            <dd id="modalPeople"></dd>
+                        </div>
+                    </dl>
+                    <div id="modalTags" class="tag-row"></div>
+                </div>
+                <div id="modalImages" class="image-gallery"></div>
+            </div>
+        </article>
+    </div>
+
+    <template id="roomCardTemplate">
+        <button class="room-card" type="button">
+            <span class="room-number"></span>
+            <span class="room-usage"></span>
+            <span class="room-people"></span>
+        </button>
+    </template>
+</body>
+
+</html>

@@ -1,0 +1,172 @@
+.module-page {
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+.module-scroll {
+  box-sizing: border-box;
+  height: 100vh;
+  padding: 0 28rpx calc(56rpx + env(safe-area-inset-bottom));
+}
+
+.module-top {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24rpx;
+  padding-left: 96rpx;
+  padding-right: 184rpx;
+}
+
+.back-btn {
+  position: absolute;
+  left: 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 104rpx;
+  height: 64rpx;
+  padding: 0 22rpx;
+  min-height: 64rpx;
+  border-radius: 999rpx;
+  background: #f8fafc;
+  color: #111827;
+  font-size: 26rpx;
+  font-weight: 800;
+  line-height: 64rpx;
+  box-shadow: none;
+}
+
+.back-btn:active {
+  background: #f1f5f9;
+}
+
+.module-title,
+.module-subtitle,
+.field-label,
+.unit-text,
+.picker-value {
+  display: block;
+}
+
+.module-title {
+  color: #111827;
+  font-size: 40rpx;
+  font-weight: 900;
+  text-align: center;
+}
+
+.module-subtitle {
+  margin-top: 6rpx;
+  color: #64748b;
+  font-size: 24rpx;
+  text-align: center;
+}
+
+.form-card {
+  box-sizing: border-box;
+  margin-bottom: 18rpx;
+  padding: 26rpx;
+  border: 1rpx solid #e5e7eb;
+  border-radius: 18rpx;
+  background: #ffffff;
+  box-shadow: 0 10rpx 24rpx rgba(15, 23, 42, 0.04);
+}
+
+.field-label {
+  margin-bottom: 14rpx;
+  color: #334155;
+  font-size: 26rpx;
+  font-weight: 800;
+}
+
+.field-input,
+.duration-input,
+.note-input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 82rpx;
+  padding: 18rpx 20rpx;
+  border: 1rpx solid #e2e8f0;
+  border-radius: 16rpx;
+  background: #f8fafc;
+  color: #111827;
+  font-size: 28rpx;
+}
+
+.duration-row {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.duration-input {
+  flex: 1;
+}
+
+.unit-text {
+  min-width: 86rpx;
+  color: #64748b;
+  font-size: 26rpx;
+  text-align: center;
+}
+
+.time-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18rpx 0;
+  border-bottom: 1rpx solid #eef2f7;
+}
+
+.time-row .field-label {
+  margin-bottom: 0;
+}
+
+.no-border {
+  border-bottom: 0;
+}
+
+.picker-value {
+  color: #ef4444;
+  font-size: 26rpx;
+  font-weight: 800;
+}
+
+.note-input {
+  min-height: 150rpx;
+}
+
+.save-btn {
+  width: 100%;
+  height: 88rpx;
+  margin: 8rpx 0 24rpx;
+  border-radius: 999rpx;
+  background: #ef4444;
+  color: #ffffff;
+  font-size: 30rpx;
+  font-weight: 900;
+  line-height: 88rpx;
+}
+
+.back-btn::after,
+.save-btn::after {
+  border: 0;
+}
+
+.sport .save-btn { background: #22c55e; }
+.sleep .save-btn { background: #6366f1; }
+.entertainment .save-btn { background: #f97316; }
+
+.deco-image {
+  display: block;
+  width: 100%;
+  height: 280rpx;
+  border-radius: 24rpx;
+  background: #ffffff;
+}
+
+.bottom-spacer {
+  height: 96rpx;
+}

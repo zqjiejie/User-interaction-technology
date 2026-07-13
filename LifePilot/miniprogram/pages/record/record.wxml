@@ -1,0 +1,35 @@
+<scroll-view class="record-page" type="list" scroll-y="true">
+  <view class="record-head">
+    <text class="page-title">生活记录</text>
+    <text class="page-subtitle">{{today}} · 选择一个模块开始记录</text>
+  </view>
+
+  <view class="module-grid">
+    <view
+      class="module-card {{item.cls}}"
+      wx:for="{{modules}}"
+      wx:key="key"
+      data-module="{{item.key}}"
+      bindtap="openModule"
+    >
+      <text class="module-title">{{item.label}}</text>
+      <text class="module-desc">{{item.desc}}</text>
+    </view>
+  </view>
+
+  <view class="section-block">
+    <text class="section-title-text">最近记录</text>
+    <view class="recent-card" wx:for="{{recent}}" wx:key="id">
+      <view class="recent-main">
+        <text class="recent-title">{{item.displayTitle}}</text>
+        <text class="recent-meta">{{item.displayDate}} · {{item.displayMeta}}</text>
+      </view>
+      <text class="recent-source">{{item.source === 'pomodoro' ? '番茄钟' : '手动'}}</text>
+    </view>
+    <view class="empty" wx:if="{{!recent.length}}">
+      <text>暂无记录</text>
+    </view>
+  </view>
+
+  <view class="bottom-spacer"></view>
+</scroll-view>

@@ -1,0 +1,45 @@
+<view class="timer-page {{theme.cls}}">
+  <block wx:if="{{error}}">
+    <view class="error-panel">
+      <text class="timer-title">无法开始计时</text>
+      <text class="timer-hint">{{error}}</text>
+      <button class="end-button" bindtap="returnToSelect">返回选择</button>
+    </view>
+  </block>
+
+  <block wx:else>
+    <view class="timer-topbar" style="{{topBarStyle}}">
+      <button class="exit-button" style="{{leftActionStyle}}" bindtap="confirmExit"><text>退出专注</text></button>
+    </view>
+    <text class="timer-title">{{title}}</text>
+    <text class="timer-hint">{{theme.hint}}</text>
+
+    <view class="stage">
+      <view class="orbit orbit-one"></view>
+      <view class="orbit orbit-two"></view>
+      <view class="scene">
+        <block wx:if="{{category === 'study'}}">
+          <view class="lamp"></view>
+          <view class="book"></view>
+        </block>
+        <block wx:elif="{{category === 'sport'}}">
+          <view class="track"></view>
+          <view class="runner"></view>
+        </block>
+        <block wx:elif="{{category === 'entertainment'}}">
+          <view class="note note-a"></view>
+          <view class="note note-b"></view>
+          <view class="pad"></view>
+        </block>
+        <block wx:else>
+          <view class="moon"></view>
+          <view class="breath"></view>
+        </block>
+      </view>
+    </view>
+
+    <text class="elapsed">{{elapsedText}}</text>
+    <text class="timer-hint">目标 {{durationMinutes}} 分钟</text>
+    <button class="end-button" bindtap="endTimer">完成</button>
+  </block>
+</view>

@@ -1,0 +1,16 @@
+.dist-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10rpx;
+  font-weight: 700;
+}
+
+.entertainment-fill {
+  background: #f59e0b;
+}
+
+.advice {
+  color: #334155;
+  line-height: 1.7;
+}
+

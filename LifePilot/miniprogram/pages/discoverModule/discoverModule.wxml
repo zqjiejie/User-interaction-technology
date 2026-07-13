@@ -1,0 +1,60 @@
+﻿<view class="module-page">
+  <scroll-view class="module-scroll" type="list" scroll-y="true">
+    <view class="module-header" style="{{topBarStyle}}">
+      <button class="back-btn" style="{{leftActionStyle}}" bindtap="goBack"><text>取消</text></button>
+      <view class="module-title-block">
+        <text class="module-title">{{detail.label}}板块</text>
+        <text class="module-subtitle">番茄钟时间 + 手动记录时间</text>
+      </view>
+    </view>
+
+    <view class="metric-grid">
+      <view class="metric-card" wx:for="{{detail.metrics}}" wx:key="label">
+        <text class="metric-value">{{item.value}}</text>
+        <text class="metric-label">{{item.label}}</text>
+      </view>
+    </view>
+
+    <view class="chart-card">
+      <view class="section-head">
+        <text class="section-title">最近 7 天</text>
+        <text class="section-sub">每日使用时间</text>
+      </view>
+      <view class="large-chart">
+        <view
+          class="large-segment"
+          wx:for="{{detail.chart.segments}}"
+          wx:for-item="seg"
+          wx:key="id"
+          style="left: {{seg.left}}; top: {{seg.top}}; width: {{seg.width}}; transform: {{seg.rotate}};"
+        ></view>
+        <view
+          class="large-point"
+          wx:for="{{detail.chart.points}}"
+          wx:for-item="point"
+          wx:key="id"
+          style="left: {{point.left}}; top: {{point.top}};"
+        ></view>
+      </view>
+    </view>
+
+    <view class="records-section">
+      <view class="section-head">
+        <text class="section-title">记录</text>
+        <button class="record-btn" bindtap="goRecord"><text>添加记录</text></button>
+      </view>
+      <view class="record-card" wx:for="{{detail.records}}" wx:key="id">
+        <view class="record-main">
+          <text class="record-title">{{item.title}}</text>
+          <text class="record-meta">{{item.date}} 路 {{item.sourceLabel}}</text>
+        </view>
+        <text class="record-duration">{{item.durationText}}</text>
+      </view>
+      <view class="empty" wx:if="{{!detail.records.length}}">
+        <text>暂无记录</text>
+      </view>
+    </view>
+
+    <view class="module-bottom-spacer"></view>
+  </scroll-view>
+</view>

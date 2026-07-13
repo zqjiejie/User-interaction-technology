@@ -1,0 +1,36 @@
+<view class="pomodoro-page">
+  <scroll-view class="pomodoro-scroll" type="list" scroll-y="true">
+    <view class="pomodoro-header">
+      <view>
+        <text class="page-title">番茄钟</text>
+        <text class="page-subtitle">查看所有专注计时记录</text>
+      </view>
+      <button class="start-btn" bindtap="goPomodoro"><text>开始</text></button>
+    </view>
+
+    <view class="record-list" wx:if="{{records.length}}">
+      <view
+        class="record-card"
+        wx:for="{{records}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        data-cloud-id="{{item.cloudId}}"
+        bindtap="openRecord"
+        bindtouchstart="onRecordTouchStart"
+        bindtouchend="onRecordTouchEnd"
+      >
+        <view class="record-main">
+          <text class="record-title">{{item.title}}</text>
+          <text class="record-meta">{{item.date}} · {{item.moduleLabel}} · {{item.statusText}}</text>
+        </view>
+        <text class="record-duration">{{item.durationText}}</text>
+      </view>
+    </view>
+
+    <view class="empty" wx:else>
+      <text>暂无番茄钟记录</text>
+    </view>
+
+    <view class="pomodoro-bottom-spacer"></view>
+  </scroll-view>
+</view>

@@ -1,0 +1,55 @@
+﻿<view class="module-page {{config.theme}}">
+  <scroll-view class="module-scroll" type="list" scroll-y="true">
+    <view class="module-top" style="{{topBarStyle}}">
+      <button class="back-btn" style="{{leftActionStyle}}" bindtap="goBack"><text>取消</text></button>
+      <view>
+        <text class="module-title">{{config.label}}</text>
+        <text class="module-subtitle">记录今天真实发生的一小段生活</text>
+      </view>
+    </view>
+
+    <view class="form-card">
+      <text class="field-label">项目 / 内容</text>
+      <input class="field-input" value="{{title}}" placeholder="{{config.titlePlaceholder}}" data-key="title" bindinput="updateField" />
+    </view>
+
+    <view class="form-card">
+      <text class="field-label">{{config.durationLabel}}</text>
+      <view class="duration-row">
+        <input class="duration-input" type="digit" value="{{duration}}" placeholder="0" data-key="duration" bindinput="updateField" />
+        <text class="unit-text">{{config.unitLabel}}</text>
+      </view>
+    </view>
+
+    <view class="form-card">
+      <view class="time-row">
+        <text class="field-label">日期</text>
+        <picker mode="date" value="{{date}}" bindchange="onDateChange">
+          <text class="picker-value">{{date}}</text>
+        </picker>
+      </view>
+      <view class="time-row">
+        <text class="field-label">开始时间</text>
+        <picker mode="time" value="{{startTime}}" bindchange="onStartTimeChange">
+          <text class="picker-value">{{startTime || '未填写'}}</text>
+        </picker>
+      </view>
+      <view class="time-row no-border">
+        <text class="field-label">结束时间</text>
+        <picker mode="time" value="{{endTime}}" bindchange="onEndTimeChange">
+          <text class="picker-value">{{endTime || '未填写'}}</text>
+        </picker>
+      </view>
+    </view>
+
+    <view class="form-card">
+      <text class="field-label">备注</text>
+      <textarea class="note-input" value="{{note}}" placeholder="可以写一点细节，方便周报回顾" data-key="note" bindinput="updateField"></textarea>
+    </view>
+
+    <button class="save-btn" bindtap="saveRecord"><text>保存记录</text></button>
+
+    <image class="deco-image" src="{{config.image}}" mode="aspectFill"></image>
+    <view class="bottom-spacer"></view>
+  </scroll-view>
+</view>

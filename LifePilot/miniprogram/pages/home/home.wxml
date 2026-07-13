@@ -1,0 +1,78 @@
+<view class="home-root">
+  <scroll-view
+    class="calendar-shell"
+    type="list"
+    scroll-y="true"
+    refresher-enabled="{{true}}"
+    refresher-triggered="{{refreshingAgenda}}"
+    bindrefresherrefresh="onAgendaRefresh"
+  >
+    <view class="top-bar" style="{{topBarStyle}}">
+      <view class="month-left">
+        <text class="month-text">{{monthTitle}}</text>
+      </view>
+      <view class="top-actions" style="{{topActionsStyle}}">
+        <button class="search-icon" style="{{searchTriggerStyle}}" bindtap="goSearch" aria-label="搜索日程">
+          <view class="search-shape" style="{{searchIconStyle}}"></view>
+        </button>
+        <button class="top-add" style="{{addTriggerStyle}}" bindtap="addSchedule" aria-label="新增日程"><text class="top-add-symbol" style="{{addIconStyle}}">+</text></button>
+      </view>
+    </view>
+
+    <view class="weekday-row">
+      <view class="weekday" wx:for="{{weekdays}}" wx:key="*this">
+        <text>{{item}}</text>
+      </view>
+    </view>
+
+    <view class="simple-month {{monthTransitionClass}}" bindtouchstart="onMonthTouchStart" bindtouchend="onMonthTouchEnd">
+      <view class="simple-day {{item.disabled ? 'empty-day' : ''}} {{item.selected && !item.isToday ? 'selected-day' : ''}} {{item.selected && item.isToday ? 'today-selected' : ''}}" wx:for="{{days}}" wx:key="id" data-day="{{item.day}}" bindtap="selectDay">
+        <text class="date-number" wx:if="{{!item.disabled}}">{{item.day}}</text>
+        <text class="lunar" wx:if="{{!item.disabled}}">{{item.lunar}}</text>
+        <view class="dot" wx:if="{{item.hasCourse}}"></view>
+      </view>
+    </view>
+
+    <view class="agenda-area">
+      <view class="agenda-summary">
+        <view>
+          <text class="agenda-summary-label">{{selectedDateLabel}}</text>
+          <text class="agenda-summary-title" overflow="ellipsis" max-lines="1">{{agendaSummary.title}}</text>
+        </view>
+        <text class="agenda-summary-count">{{agendaSummary.countText}}</text>
+      </view>
+      <block wx:if="{{events.length}}">
+        <view class="swipe-row" wx:for="{{events}}" wx:key="id" data-id="{{item.id}}" data-date="{{item.occurrenceDateKey}}" bindlongpress="editSchedule">
+          <view class="agenda-item agenda-status-{{item.status}} {{item.highlight ? 'just-added' : ''}}">
+            <view class="accent"></view>
+            <view class="agenda-main">
+              <text class="agenda-title" overflow="ellipsis" max-lines="1">{{item.title}}</text>
+              <text class="agenda-location">{{item.location}}</text>
+            </view>
+            <view class="agenda-time">
+              <text>{{item.start}}</text>
+              <text>{{item.end}}</text>
+            </view>
+          </view>
+        </view>
+      </block>
+      <view class="empty-agenda" wx:else>
+        <view class="empty-icon">+</view>
+        <text class="empty-title">暂无日程</text>
+        <text class="empty-copy">可以先添加一个安排。右下角入口可记录这一天的无边记。</text>
+        <view class="empty-actions">
+          <button class="empty-action primary" bindtap="addSchedule">添加日程</button>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <button
+    class="boundless-corner-trigger {{events.length ? '' : 'is-empty-date'}}"
+    bindtap="openSelectedBoundless"
+    aria-label="打开选中日期的无边记"
+  >
+    <text class="boundless-label">无边记</text>
+    <image class="trigger-icon-box" src="/assets/icons/boundless-note-trigger.png" mode="aspectFit"></image>
+  </button>
+</view>

@@ -1,0 +1,66 @@
+<scroll-view class="discover-page" type="list" scroll-y="true">
+  <view class="discover-head">
+    <text class="page-kicker">发现</text>
+    <view class="overview-card">
+      <view class="overview-main">
+        <text class="overview-title">生活数据</text>
+        <text class="overview-range">{{overview.weekRange}}</text>
+      </view>
+      <view class="overview-stats">
+        <view class="overview-stat">
+          <text class="stat-value">{{overview.totalText}}</text>
+          <text class="stat-label">本周总时长</text>
+        </view>
+        <view class="overview-stat">
+          <text class="stat-value">{{overview.activeLabel}}</text>
+          <text class="stat-label">最活跃模块</text>
+        </view>
+      </view>
+      <text class="overview-summary">{{overview.summary}}</text>
+    </view>
+  </view>
+
+  <view class="module-grid">
+    <view
+      class="module-card {{item.bg}}"
+      wx:for="{{modules}}"
+      wx:key="key"
+      data-module="{{item.key}}"
+      bindtap="goModule"
+    >
+      <view class="module-top">
+        <view class="module-name-wrap">
+          <text class="module-icon" style="background: {{item.color}};">{{item.icon}}</text>
+          <text class="module-name">{{item.label}}</text>
+        </view>
+        <text class="module-trend">{{item.trend}}</text>
+      </view>
+      <text class="module-status">{{item.status}}</text>
+      <text class="module-total">{{item.weeklyText}}</text>
+      <text class="module-today">今日 {{item.todayText}}</text>
+      <view class="spark-chart">
+        <view
+          class="spark-segment"
+          wx:for="{{item.chart.segments}}"
+          wx:for-item="seg"
+          wx:key="id"
+          style="left: {{seg.left}}; top: {{seg.top}}; width: {{seg.width}}; transform: {{seg.rotate}}; background: {{item.color}};"
+        ></view>
+        <view
+          class="spark-point"
+          wx:for="{{item.chart.points}}"
+          wx:for-item="point"
+          wx:key="id"
+          style="left: {{point.left}}; top: {{point.top}}; background: {{item.color}};"
+        ></view>
+      </view>
+    </view>
+  </view>
+
+  <button class="pomodoro-entry" bindtap="goPomodoro">
+    <text class="pomodoro-title">添加番茄钟</text>
+    <text class="pomodoro-sub">从专注计时补充今日数据</text>
+  </button>
+
+  <view class="discover-bottom-spacer"></view>
+</scroll-view>

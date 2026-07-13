@@ -1,0 +1,35 @@
+.custom-tabbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 128rpx;
+  padding-bottom: env(safe-area-inset-bottom);
+  border-top: 1rpx solid #e5e7eb;
+  background: #ffffff;
+}
+
+.tab-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25%;
+  height: 112rpx;
+}
+
+.tab-icon {
+  width: 100rpx;
+  height: 100rpx;
+  opacity: 0.82;
+  transition: opacity 160ms ease, transform 160ms ease, filter 160ms ease;
+}
+
+.tab-icon.active {
+  opacity: 1;
+  transform: translateY(-6rpx);
+  filter: drop-shadow(0 8rpx 12rpx rgba(239, 68, 68, 0.18));
+}

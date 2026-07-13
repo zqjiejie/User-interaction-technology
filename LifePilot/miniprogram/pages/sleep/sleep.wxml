@@ -1,0 +1,45 @@
+<view class="page">
+  <view class="section">
+    <view class="section-title">睡眠看板</view>
+    <view class="panel-grid">
+      <view class="panel-card">
+        <view class="big-number">{{sleep.lastNightHours}}小时</view>
+        <view class="muted">昨晚睡眠</view>
+      </view>
+      <view class="panel-card">
+        <view class="big-number">{{sleep.averageHours}}小时</view>
+        <view class="muted">周平均</view>
+      </view>
+      <view class="panel-card">
+        <view class="big-number">{{sleep.score}}</view>
+        <view class="muted">睡眠评分</view>
+      </view>
+      <view class="panel-card">
+        <view class="big-number">{{sleep.bedTime}}</view>
+        <view class="muted">平均入睡</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">质量趋势</view>
+    <view class="card stack">
+      <view wx:for="{{trend}}" wx:key="label">
+        <view class="sleep-row">
+          <text>{{item.label}}</text>
+          <text>{{item.value}}</text>
+        </view>
+        <view class="progress-track">
+          <view class="progress-fill sleep-fill" style="width: {{item.value}}%;"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">作息建议</view>
+    <view class="card advice">{{sleep.advice}}</view>
+  </view>
+
+  <button class="primary-button" bindtap="addSleep">记录昨晚睡眠</button>
+</view>

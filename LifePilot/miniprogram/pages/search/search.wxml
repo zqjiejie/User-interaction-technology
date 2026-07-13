@@ -1,0 +1,35 @@
+<view class="search-page">
+  <view class="search-topbar" style="{{topBarStyle}}">
+    <button class="back-button" style="{{leftActionStyle}}" bindtap="goBack"><text>取消</text></button>
+    <text class="search-title">搜索</text>
+  </view>
+  <view class="search-bar">
+    <view class="search-symbol"></view>
+    <input class="search-input" value="{{keyword}}" placeholder="搜索日程或无边记" confirm-type="search" bindinput="onInput" bindconfirm="onConfirm" focus />
+    <button class="clear-button" wx:if="{{keyword}}" bindtap="clearKeyword"><text>×</text></button>
+  </view>
+
+  <button class="search-button" bindtap="search"><text>搜索</text></button>
+
+  <scroll-view class="result-scroll" scroll-y="true" enhanced="{{true}}" show-scrollbar="{{false}}">
+    <view class="result-list" wx:if="{{results.length}}">
+      <view
+        class="result-item"
+        wx:for="{{results}}"
+        wx:key="id"
+        data-index="{{index}}"
+        bindtap="openResult"
+      >
+        <view class="result-main">
+          <text class="result-title" overflow="ellipsis" max-lines="1">{{item.title}}</text>
+          <text class="result-meta">{{item.date || '未设置日期'}} {{item.startTime || item.start || ''}} {{item.location || ''}}</text>
+        </view>
+        <text class="result-tag">{{item.source || '日程'}}</text>
+      </view>
+    </view>
+
+    <text class="empty-search" wx:elif="{{searched && !loading}}">没有匹配结果。</text>
+    <text class="empty-search" wx:elif="{{loading}}">搜索中...</text>
+    <text class="empty-search" wx:else>输入关键词搜索日程和无边记。</text>
+  </scroll-view>
+</view>

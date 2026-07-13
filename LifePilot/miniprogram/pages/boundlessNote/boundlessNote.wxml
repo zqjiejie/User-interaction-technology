@@ -1,0 +1,114 @@
+<view class="note-page">
+  <view class="editor-topbar">
+    <button class="top-action cancel-action" bindtap="cancelEdit"><text>取消</text></button>
+    <button wx:if="{{pageMode === 'edit'}}" class="top-action delete-action" bindtap="deleteCurrentNote"><text>删除</text></button>
+    <button wx:else class="top-action save-action" bindtap="saveDraftAndExit"><text>保存</text></button>
+    <button class="top-action done-action" bindtap="finishEdit"><text>完成</text></button>
+  </view>
+
+  <scroll-view class="note-scroll" type="list" scroll-y="true">
+    <view class="note-card">
+      <picker mode="date" value="{{editingNoteDate}}" bindchange="onDateChange">
+        <view class="note-meta">
+          <view class="date-dot"></view>
+          <text>{{editingNoteDateText}}</text>
+        </view>
+      </picker>
+
+      <textarea
+        class="note-editor"
+        placeholder="写下想法、任务或任何线索"
+        value="{{editingNoteContent}}"
+        bindinput="updateNoteContent"
+        adjust-position="{{true}}"
+        show-confirm-bar="{{false}}"
+        maxlength="-1"
+      ></textarea>
+
+      <view class="image-attachments" wx:if="{{imageAttachments.length}}">
+        <text class="attachment-section-title">图片</text>
+        <view class="image-grid">
+          <image
+            wx:for="{{imageAttachments}}"
+            wx:key="id"
+            class="image-thumb"
+            src="{{item.src}}"
+            mode="aspectFill"
+            data-id="{{item.id}}"
+            data-src="{{item.src}}"
+            data-index="{{index}}"
+            bindtap="previewAttachmentImage"
+            bindlongpress="confirmRemoveAttachment"
+          ></image>
+        </view>
+      </view>
+
+      <view class="attachment-list" wx:if="{{otherAttachments.length}}">
+        <view
+          wx:for="{{otherAttachments}}"
+          wx:key="id"
+          class="attachment-item type-{{item.type}}"
+          data-id="{{item.id}}"
+          catchtap="previewAttachment"
+          catchlongpress="confirmRemoveAttachment"
+        >
+          <block wx:if="{{item.type === 'location'}}">
+            <view class="attachment-kind-dot"></view>
+            <view class="attachment-info">
+              <text class="attachment-title">{{item.title}}</text>
+              <text class="attachment-subtitle">{{item.value}}</text>
+            </view>
+          </block>
+
+          <block wx:elif="{{item.type === 'audio'}}">
+            <view class="attachment-kind-dot"></view>
+            <view class="attachment-info">
+              <text class="attachment-title">{{playingAudioId === item.id ? '正在播放' : item.title}}</text>
+              <text class="attachment-subtitle">点击播放 / 暂停</text>
+            </view>
+          </block>
+
+          <block wx:elif="{{item.type === 'scanText'}}">
+            <view class="attachment-kind-dot"></view>
+            <view class="attachment-info">
+              <text class="attachment-title">{{item.title}}</text>
+              <text class="attachment-subtitle scan-text-preview">{{item.value}}</text>
+            </view>
+          </block>
+
+          <block wx:else>
+            <view class="attachment-kind-dot"></view>
+            <view class="attachment-info">
+              <text class="attachment-title">{{item.title}}</text>
+              <text class="attachment-subtitle">{{item.value}}</text>
+            </view>
+          </block>
+        </view>
+      </view>
+
+      <view wx:if="{{attachmentPanelOpen}}" class="attachment-mask" catchtap="closeAttachmentPanel"></view>
+      <view class="attachment-panel {{attachmentPanelOpen ? 'is-open' : ''}}">
+        <button
+          wx:for="{{attachmentOptions}}"
+          wx:key="type"
+          class="attachment-option"
+          hover-class="attachment-option-pressed"
+          data-type="{{item.type}}"
+          catchtap="handleAttachmentOption"
+        >
+          <view class="option-dot"></view>
+          <text>{{item.label}}</text>
+        </button>
+      </view>
+
+      <button
+        class="paperclip-button {{attachmentPanelOpen ? 'active' : ''}}"
+        catchtap="toggleAttachmentPanel"
+        aria-label="附件"
+      >
+        <text class="paperclip-label">附件</text>
+        <text class="paperclip-plus">{{attachmentPanelOpen ? '×' : '+'}}</text>
+      </button>
+    </view>
+  </scroll-view>
+</view>

@@ -1,0 +1,9 @@
+{
+  "triggers": [
+    {
+      "name": "scanDueReminders",
+      "type": "timer",
+      "config": "0 */5 * * * * *"
+    }
+  ]
+}

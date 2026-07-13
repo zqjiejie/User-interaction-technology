@@ -1,0 +1,26 @@
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 18rpx;
+}
+
+.bar-label {
+  width: 72rpx;
+  color: #475569;
+}
+
+.sport-fill {
+  background: #16a34a;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+
+.advice {
+  color: #334155;
+  line-height: 1.7;
+}
+

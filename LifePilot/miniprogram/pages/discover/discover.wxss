@@ -1,0 +1,248 @@
+.discover-page {
+  box-sizing: border-box;
+  height: 100vh;
+  padding: calc(30rpx + env(safe-area-inset-top)) 28rpx calc(58rpx + env(safe-area-inset-bottom));
+  background: #ffffff;
+  color: #111827;
+}
+
+.discover-head {
+  margin-bottom: 24rpx;
+}
+
+.page-kicker {
+  display: block;
+  margin-bottom: 18rpx;
+  color: #111827;
+  font-size: 44rpx;
+  font-weight: 900;
+}
+
+.overview-card {
+  box-sizing: border-box;
+  padding: 28rpx;
+  border: 1rpx solid #e5e7eb;
+  border-radius: 20rpx;
+  background: #ffffff;
+  box-shadow: 0 10rpx 28rpx rgba(15, 23, 42, 0.05);
+}
+
+.overview-main,
+.overview-stats,
+.module-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.overview-title {
+  color: #0f172a;
+  font-size: 38rpx;
+  font-weight: 900;
+}
+
+.overview-range {
+  min-width: 190rpx;
+  height: 58rpx;
+  border-radius: 999rpx;
+  background: #f3f4f6;
+  color: #475569;
+  font-size: 24rpx;
+  line-height: 58rpx;
+  text-align: center;
+}
+
+.overview-stats {
+  gap: 18rpx;
+  margin-top: 28rpx;
+}
+
+.overview-stat {
+  box-sizing: border-box;
+  flex: 1;
+  min-width: 0;
+  padding: 22rpx;
+  border-radius: 16rpx;
+  background: #f8fafc;
+}
+
+.stat-value,
+.stat-label,
+.overview-summary,
+.module-name,
+.module-trend,
+.module-total,
+.module-today,
+.pomodoro-title,
+.pomodoro-sub {
+  display: block;
+}
+
+.stat-value {
+  color: #111827;
+  font-size: 34rpx;
+  font-weight: 900;
+}
+
+.stat-label {
+  margin-top: 8rpx;
+  color: #64748b;
+  font-size: 22rpx;
+}
+
+.overview-summary {
+  margin-top: 22rpx;
+  color: #64748b;
+  font-size: 25rpx;
+}
+
+.module-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18rpx;
+}
+
+.module-card {
+  box-sizing: border-box;
+  width: calc((100% - 18rpx) / 2);
+  min-height: 300rpx;
+  padding: 24rpx 22rpx;
+  border: 1rpx solid #e5e7eb;
+  border-radius: 18rpx;
+  background: #ffffff;
+  box-shadow: 0 10rpx 24rpx rgba(15, 23, 42, 0.04);
+  transition: transform 160ms ease, background-color 160ms ease;
+}
+
+.module-card:active,
+.pomodoro-entry:active {
+  transform: scale(0.98);
+}
+
+.module-card:active {
+  background: #f8fafc;
+}
+
+.module-name-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  min-width: 0;
+}
+
+.module-icon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 24rpx;
+  font-weight: 900;
+}
+
+.module-name {
+  color: #111827;
+  font-size: 30rpx;
+  font-weight: 900;
+}
+
+.module-trend {
+  max-width: 126rpx;
+  color: #64748b;
+  font-size: 20rpx;
+  text-align: right;
+}
+
+.module-total {
+  margin-top: 16rpx;
+  color: #0f172a;
+  font-size: 40rpx;
+  font-weight: 900;
+}
+
+.module-status {
+  display: block;
+  margin-top: 18rpx;
+  color: #475569;
+  font-size: 22rpx;
+  font-weight: 700;
+}
+
+.module-today {
+  margin-top: 4rpx;
+  color: #64748b;
+  font-size: 23rpx;
+}
+
+.spark-chart {
+  position: relative;
+  height: 96rpx;
+  margin-top: 22rpx;
+  overflow: hidden;
+  border-radius: 14rpx;
+  background: #f8fafc;
+}
+
+.spark-chart::after {
+  position: absolute;
+  right: 4rpx;
+  bottom: 10rpx;
+  left: 4rpx;
+  height: 1rpx;
+  background: rgba(148, 163, 184, 0.35);
+  content: "";
+}
+
+.spark-segment,
+.spark-point {
+  position: absolute;
+  background: #ef4444;
+}
+
+.spark-segment {
+  height: 4rpx;
+  border-radius: 999rpx;
+  transform-origin: 0 50%;
+}
+
+.spark-point {
+  width: 10rpx;
+  height: 10rpx;
+  margin-left: -5rpx;
+  margin-top: -5rpx;
+  border-radius: 50%;
+}
+
+.pomodoro-entry {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 112rpx;
+  margin-top: 24rpx;
+  padding: 22rpx 28rpx;
+  border-radius: 18rpx;
+  background: #111827;
+  color: #ffffff;
+  text-align: left;
+}
+
+.pomodoro-title {
+  font-size: 30rpx;
+  font-weight: 900;
+}
+
+.pomodoro-sub {
+  margin-top: 6rpx;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 23rpx;
+}
+
+.discover-bottom-spacer {
+  height: 120rpx;
+}

@@ -1,0 +1,126 @@
+.record-page {
+  box-sizing: border-box;
+  height: 100vh;
+  padding: calc(30rpx + env(safe-area-inset-top)) 28rpx calc(56rpx + env(safe-area-inset-bottom));
+  background: #f6f7fb;
+}
+
+.record-head {
+  margin-bottom: 24rpx;
+}
+
+.page-title,
+.page-subtitle,
+.module-title,
+.module-desc,
+.section-title-text,
+.recent-title,
+.recent-meta,
+.recent-source,
+.empty {
+  display: block;
+}
+
+.page-title {
+  color: #111827;
+  font-size: 46rpx;
+  font-weight: 900;
+}
+
+.page-subtitle {
+  margin-top: 8rpx;
+  color: #64748b;
+  font-size: 25rpx;
+}
+
+.module-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18rpx;
+}
+
+.module-card {
+  box-sizing: border-box;
+  width: calc((100% - 18rpx) / 2);
+  min-height: 180rpx;
+  padding: 26rpx;
+  border: 1rpx solid rgba(15, 23, 42, 0.06);
+  border-radius: 22rpx;
+  background: #ffffff;
+  box-shadow: 0 14rpx 30rpx rgba(15, 23, 42, 0.06);
+}
+
+.module-card.study { background: linear-gradient(160deg, #fff1f2 0%, #ffffff 80%); }
+.module-card.sleep { background: linear-gradient(160deg, #eef2ff 0%, #ffffff 80%); }
+.module-card.sport { background: linear-gradient(160deg, #ecfdf5 0%, #ffffff 80%); }
+.module-card.entertainment { background: linear-gradient(160deg, #fff7ed 0%, #ffffff 80%); }
+
+.module-title {
+  color: #111827;
+  font-size: 34rpx;
+  font-weight: 900;
+}
+
+.module-desc {
+  margin-top: 16rpx;
+  color: #64748b;
+  font-size: 23rpx;
+  line-height: 1.45;
+}
+
+.section-block {
+  margin-top: 28rpx;
+}
+
+.section-title-text {
+  margin-bottom: 16rpx;
+  color: #111827;
+  font-size: 32rpx;
+  font-weight: 900;
+}
+
+.recent-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18rpx;
+  box-sizing: border-box;
+  margin-bottom: 16rpx;
+  padding: 24rpx;
+  border: 1rpx solid rgba(15, 23, 42, 0.06);
+  border-radius: 20rpx;
+  background: #ffffff;
+}
+
+.recent-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.recent-title {
+  color: #111827;
+  font-size: 29rpx;
+  font-weight: 800;
+}
+
+.recent-meta {
+  margin-top: 8rpx;
+  color: #64748b;
+  font-size: 23rpx;
+}
+
+.recent-source {
+  color: #ef4444;
+  font-size: 23rpx;
+  font-weight: 800;
+}
+
+.empty {
+  padding: 60rpx 0;
+  color: #94a3b8;
+  text-align: center;
+}
+
+.bottom-spacer {
+  height: 120rpx;
+}

@@ -1,0 +1,74 @@
+<view class="page">
+  <view class="top-decoration">
+    <view class="circle c1"></view>
+    <view class="circle c2"></view>
+    <view class="circle c3"></view>
+  </view>
+
+  <view class="main-content">
+    <view class="logo-section">
+      <view class="logo-icon">
+        <text class="logo-emoji">CM</text>
+      </view>
+      <view class="app-name">CampusMind</view>
+      <view class="app-slogan">规划、专注、复盘</view>
+    </view>
+
+    <view class="features">
+      <view class="feature-item">
+        <text class="feature-icon">Cal</text>
+        <text class="feature-text">智能日程</text>
+      </view>
+      <view class="feature-item">
+        <text class="feature-icon">Note</text>
+        <text class="feature-text">无边记</text>
+      </view>
+      <view class="feature-item">
+        <text class="feature-icon">Data</text>
+        <text class="feature-text">生活记录</text>
+      </view>
+      <view class="feature-item">
+        <text class="feature-icon">Focus</text>
+        <text class="feature-text">番茄专注</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="user-info-section">
+    <view class="avatar-section">
+      <button class="avatar-picker" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar">
+        <image class="avatar-preview" src="{{avatarUrl}}" wx:if="{{avatarUrl}}" mode="aspectFill" />
+        <view class="avatar-placeholder" wx:else>
+          <text class="avatar-plus">+</text>
+        </view>
+      </button>
+      <text class="avatar-label">{{avatarUrl ? '已选择头像' : '选择微信头像'}}</text>
+    </view>
+    <view class="nickname-section">
+      <input
+        class="nickname-input"
+        type="nickname"
+        value="{{nickName}}"
+        placeholder="使用微信昵称"
+        bindinput="onNicknameInput"
+        bindblur="onNicknameBlur"
+      />
+    </view>
+  </view>
+
+  <view class="bottom-section">
+    <view class="privacy-notice">
+      <text>登录即表示你同意 CampusMind 服务条款。</text>
+    </view>
+
+    <button
+      class="login-btn"
+      loading="{{loading}}"
+      disabled="{{loading}}"
+      bindtap="handleLogin"
+    >
+      <text wx:if="{{!loading}}">微信登录</text>
+      <text wx:else>登录中...</text>
+    </button>
+  </view>
+</view>

@@ -1,0 +1,38 @@
+﻿<view class="schedule-page">
+  <view class="schedule-head">
+    <button class="back-button" bindtap="goBack"><text>取消</text></button>
+    <text class="page-title">鍏ㄩ儴鏃ョ▼</text>
+  </view>
+
+  <scroll-view class="schedule-scroll" type="list" scroll-y="true">
+    <view wx:if="{{loading}}" class="state-card">
+      <text>鍔犺浇涓?..</text>
+    </view>
+
+    <block wx:elif="{{items.length}}">
+      <view
+        class="schedule-card"
+        wx:for="{{items}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        data-date="{{item.dateKey || item.startDateKey || item.occurrenceDateKey}}"
+        data-source="{{item.sourceKey}}"
+        bindtouchstart="onItemTouchStart"
+        bindtouchend="onItemTouchEnd"
+        bindlongpress="editSchedule"
+      >
+        <view class="card-main">
+          <text class="schedule-title" overflow="ellipsis" max-lines="1">{{item.title}}</text>
+          <text class="schedule-meta">{{item.dateLabel}} {{item.timeText}}</text>
+          <text class="schedule-location" overflow="ellipsis" max-lines="1">{{item.metaText}}</text>
+        </view>
+      </view>
+    </block>
+
+    <view wx:else class="state-card">
+      <text>鏆傛棤鏃ョ▼</text>
+    </view>
+
+    <view class="bottom-spacer"></view>
+  </scroll-view>
+</view>

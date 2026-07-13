@@ -1,0 +1,45 @@
+<view class="page">
+  <view class="section">
+    <view class="section-title">娱乐看板</view>
+    <view class="panel-grid">
+      <view class="panel-card">
+        <view class="big-number">{{entertainment.todayMinutes}}分钟</view>
+        <view class="muted">今日娱乐</view>
+      </view>
+      <view class="panel-card">
+        <view class="big-number">{{entertainment.limitMinutes}}分钟</view>
+        <view class="muted">每日建议上限</view>
+      </view>
+      <view class="panel-card">
+        <view class="big-number">{{entertainment.peak}}</view>
+        <view class="muted">高发时段</view>
+      </view>
+      <view class="panel-card">
+        <view class="big-number">{{entertainment.types.length}}</view>
+        <view class="muted">娱乐类型</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">类型占比</view>
+    <view class="card stack">
+      <view wx:for="{{distribution}}" wx:key="label">
+        <view class="dist-row">
+          <text>{{item.label}}</text>
+          <text>{{item.value}}%</text>
+        </view>
+        <view class="progress-track">
+          <view class="progress-fill entertainment-fill" style="width: {{item.value}}%;"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">健康娱乐提醒</view>
+    <view class="card advice">{{entertainment.advice}}</view>
+  </view>
+
+  <button class="primary-button" bindtap="addEntertainment">记录娱乐时间</button>
+</view>
